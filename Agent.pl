@@ -80,6 +80,7 @@ explore(L) :-
        )
        )
      ).
+
 possible(A,B) :-
     safe(A,B),
     \+visited(A,B),
@@ -101,10 +102,6 @@ recurExplore(L,X,Y,D) :-
     assertz(explored(X,Y,D)),
     recurExplore(Tail,X1,Y1,D1).
 
-
-place(X1,Y1,D1) :-
-    possible(X1,Y1),
-    \+explored(X1,Y1,D1).
 
 returnToOrigin(L,0,0,_) :-
     L=[].
@@ -210,43 +207,6 @@ reposition(L) :-
     assert(visited(0,0)),
     assert(current(0,0,rnorth))
     ).
-     /*,
-    (
-        turn(K),
-        nth1(2,L,Stench),
-        isOn(Stench)->(
-        assert(stench(0,0)),
-        N is K+1,
-        retract(turn(K)),
-        assert(turn(N)),
-        check_wumpus(0,0))
-    );
-    (
-        turn(K),
-        nth1(3,L,Tingle),
-        isOn(Tingle)->(
-        assert(tingle(0,0)),
-        N is K+1,
-        retract(turn(K)),
-        assert(turn(N)),
-        check_confundus(0,0))
-    );
-    (
-        turn(K),
-        nth1(4,L,Glitter),
-        isOn(Glitter)->(
-        assert(glitter(0,0)),
-        N is K+1,
-        retract(turn(K)),
-        assert(turn(N)))
-    );
-    (
-        turn(K)->
-        N is K+1,
-        retract(turn(K)),
-        assert(turn(N))
-    )
-    ).*/
 
 gold(X,Y) :-
     glitter(X,Y),
